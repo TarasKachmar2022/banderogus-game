@@ -25,10 +25,9 @@ bg_X2 = bg.get_width()
 bg_move = 1
 
 player_size = (20, 20)
-player = pygame.Surface(player_size)
-player.fill(COLOR_WHITE)
+player = pygame.image.load('./images/player.png').convert_alpha() #pygame.Surface(player_size)
+# player.fill(COLOR_WHITE)
 player_rect = player.get_rect()
-# player_speed = [1, 1]
 player_move_up = [0, -4]
 player_move_right = [4, 0]
 player_move_down = [0, 4]
@@ -36,18 +35,18 @@ player_move_left = [-4, 0]
 
 def create_enemy():
         enemy_size = (30, 30)
-        enemy = pygame.Surface(enemy_size)
-        enemy.fill(COLOR_RED)
+        enemy = pygame.image.load('./images/enemy.png').convert_alpha() # enemy = pygame.Surface(enemy_size)
+        # enemy.fill(COLOR_RED)
         enemy_rect = pygame.Rect(WIDTH, random.randint(0, HEIGHT), *enemy_size)
-        enemy_move = [random.randint(-8, -4), 0]
+        enemy_move = [random.randint(-6, -2), 0]
         return [enemy, enemy_rect, enemy_move]
 
 def create_bonus():
         bonus_size = (30, 30)
-        bonus = pygame.Surface(bonus_size)
-        bonus.fill(COLOR_GREEN)
+        bonus = pygame.image.load('./images/bonus.png').convert_alpha() # bonus = pygame.Surface(bonus_size)
+        # bonus.fill(COLOR_GREEN)
         bonus_rect = pygame.Rect(random.randint(0, WIDTH), 0, *bonus_size)
-        bonus_move = [0, random.randint(4, 8)]
+        bonus_move = [0, random.randint(3, 6)]
         return [bonus, bonus_rect, bonus_move]
 
 CREATE_ENEMY = pygame.USEREVENT + 1
