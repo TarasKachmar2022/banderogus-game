@@ -12,6 +12,7 @@ HEIGHT = 800
 
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLACK = (0, 0, 0)
+COLOR_BLUE = (0, 0, 255)
 
 main_display = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -25,6 +26,12 @@ player_move_top = [0, -1]
 player_move_right = [1, 0]
 player_move_down = [0, 1]
 player_move_left = [-1, 0]
+
+enemy_size = (30, 30)
+enemy = pygame.Surface(enemy_size)
+enemy.fill(COLOR_BLUE)
+enemy_rect = pygame.Rect(WIDTH, 100, *enemy_size)
+enemy_move = [-1, 0]
 
 playing = True
 
@@ -51,6 +58,8 @@ while playing:
         if keys[K_LEFT] and player_rect.left > 0:
                 player_rect = player_rect.move(player_move_left)
 
+        enemy_rect = enemy_rect.move(enemy_move)
+
 # Рандомна зміна напрямку
         # if player_rect.top <= 0:
         #         player_speed = random.choice(([-1, 1], [1, 1]))
@@ -65,6 +74,8 @@ while playing:
         #         player_speed = random.choice(([1, 1], [1, -1]))
 
         main_display.blit(player, player_rect)
+
+        main_display.blit(enemy, enemy_rect)
 
         # player_rect = player_rect.move(player_speed)
 
