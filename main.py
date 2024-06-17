@@ -28,6 +28,7 @@ player_size = (20, 20)
 player = pygame.image.load('./images/player.png').convert_alpha() #pygame.Surface(player_size)
 # player.fill(COLOR_WHITE)
 player_rect = player.get_rect()
+player_rect.center = main_display.get_rect().center
 player_move_up = [0, -4]
 player_move_right = [4, 0]
 player_move_down = [0, 4]
