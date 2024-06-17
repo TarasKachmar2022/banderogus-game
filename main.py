@@ -27,11 +27,18 @@ player_move_right = [1, 0]
 player_move_down = [0, 1]
 player_move_left = [-1, 0]
 
-enemy_size = (30, 30)
-enemy = pygame.Surface(enemy_size)
-enemy.fill(COLOR_BLUE)
-enemy_rect = pygame.Rect(WIDTH, 100, *enemy_size)
-enemy_move = [-1, 0]
+def create_enemy():
+        enemy_size = (30, 30)
+        enemy = pygame.Surface(enemy_size)
+        enemy.fill(COLOR_BLUE)
+        enemy_rect = pygame.Rect(WIDTH, 100, *enemy_size)
+        enemy_move = [-1, 0]
+        return enemy, enemy_rect, enemy_move
+
+CREATE_ENEMY = pygame.USEREVENT + 1
+pygame.time.set_timer(CREATE_ENEMY, 1500)
+
+enemies = []
 
 playing = True
 
@@ -41,6 +48,8 @@ while playing:
         for event in pygame.event.get():
                 if event.type == QUIT:
                         playing = False
+                if event.type == CREATE_ENEMY:
+                        enemies.append(create_enemy())
 
         main_display.fill(COLOR_BLACK)
 
@@ -58,7 +67,7 @@ while playing:
         if keys[K_LEFT] and player_rect.left > 0:
                 player_rect = player_rect.move(player_move_left)
 
-        enemy_rect = enemy_rect.move(enemy_move)
+        # enemy_rect = enemy_rect.move(enemy_move)
 
 # Рандомна зміна напрямку
         # if player_rect.top <= 0:
@@ -76,7 +85,8 @@ while playing:
         main_display.blit(player, player_rect)
 
         main_display.blit(enemy, enemy_rect)
+        # print(len(enemies))
 
-        # player_rect = player_rect.move(player_speed)
+        player_rect = player_rect.move(player_speed)
 
         pygame.display.flip()
